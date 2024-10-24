@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=4 uid="uid://blogybpkx4lqp"]
+[gd_scene load_steps=67 format=4 uid="uid://blogybpkx4lqp"]
 
 [ext_resource type="Script" path="res://Scripts/ModdingSpawnArea.gd" id="1_cyepn"]
 [ext_resource type="Texture2D" uid="uid://6xc157cr7670" path="res://Assets/trash_bag_0.png" id="2_6skmr"]
@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://w5i1a1dy63j0" path="res://Assets/TrashbinTexture/Trashbin_roughness.png" id="21_lcdbo"]
 [ext_resource type="Script" path="res://Scripts/TrashHelper.gd" id="22_ilxlr"]
 [ext_resource type="Script" path="res://SDKScripts/BinInformation2.gd" id="23_0hi2v"]
+[ext_resource type="VoxelGIData" uid="uid://dvmxom3eponsc" path="res://ModdedMapBakedLights.res" id="24_tqf5g"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_hqad5"]
 
@@ -339,22 +340,6 @@ mesh = SubResource("ArrayMesh_nm8rr")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_kwupa")
 
-[node name="Section1" type="CSGBox3D" parent="SpawnArea DONT TOUCH IT"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
-material_override = ExtResource("6_omwc3")
-use_collision = true
-collision_layer = 3
-collision_mask = 3
-flip_faces = true
-size = Vector3(20, 10, 20)
-
-[node name="Door1" type="CSGBox3D" parent="SpawnArea DONT TOUCH IT/Section1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.5)
-material_override = ExtResource("6_omwc3")
-operation = 2
-use_collision = true
-size = Vector3(10, 10, 1)
-
 [node name="Label3D" type="Label3D" parent="SpawnArea DONT TOUCH IT"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16, 0)
 billboard = 2
@@ -367,8 +352,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 10)
 no_depth_test = true
 modulate = Color(1, 0, 1, 1)
 text = "STARTS HERE
-DW ABOUT
-THE WALL"
+"
 font_size = 300
 
 [node name="Label3D3" type="Label3D" parent="SpawnArea DONT TOUCH IT"]
@@ -628,10 +612,11 @@ shape = SubResource("ConvexPolygonShape3D_6bybh")
 [node name="Helper" type="Node3D" parent="Every Objects/TrashEnd"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 
-[node name="Area3D" type="Area3D" parent="Every Objects/TrashEnd"]
+[node name="Area3D" type="Area3D" parent="Every Objects/TrashEnd" node_paths=PackedStringArray("helper")]
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("22_ilxlr")
+helper = NodePath("../Helper")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Every Objects/TrashEnd/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -760,9 +745,28 @@ shape = SubResource("BoxShape3D_7pg4l")
 [node name="Helper" type="Node3D" parent="Every Objects/End"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 
-[node name="BakedLights" type="VoxelGI" parent="."]
+[node name="Boundary" type="Node3D" parent="."]
 
-[node name="This should cover the whole area,then bake" type="Node" parent="BakedLights"]
+[node name="Section" type="CSGBox3D" parent="Boundary"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+material_override = ExtResource("6_omwc3")
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+flip_faces = true
+size = Vector3(20, 10, 20)
+
+[node name="Section" type="CSGBox3D" parent="Boundary/Section"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 25)
+material_override = ExtResource("6_omwc3")
+use_collision = true
+flip_faces = true
+size = Vector3(10, 12, 30)
+
+[node name="BakedLights" type="VoxelGI" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+size = Vector3(20, 16, 20)
+data = ExtResource("24_tqf5g")
 
 [node name="ScalablePlateform" type="StaticBody3D" parent="."]
 transform = Transform3D(10, 0, 0, 0, 2, 0, 0, 0, 30, 0, -1, 25)
