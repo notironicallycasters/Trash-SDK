@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bpax3th85cp7y"
+path="res://.godot/imported/Allo selem.mp3-446c7d2faba80d4935dd9de81e42a11b.mp3str"
+
+[deps]
+
+source_file="res://Assets/Allo selem.mp3"
+dest_files=["res://.godot/imported/Allo selem.mp3-446c7d2faba80d4935dd9de81e42a11b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
