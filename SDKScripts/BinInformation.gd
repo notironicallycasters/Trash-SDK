@@ -5,7 +5,7 @@ extends Node3D
 var player = Node3D
 @export var data = Node
 @export var index = int(0) #Which bin is i
-@export var finsihable = true
+var finsihable = false
 
 
 #When you start the next level
@@ -13,8 +13,6 @@ func _on_start_body_entered(body):
 	if body is RigidBody3D:
 		player.time = 0 #Reset level timer
 		player.finished = false #The level started
-		data.data["location"] = str(index+1) #Where you are
-		data.save() #Save the data where you are
 
 
 func _on_end_body_entered(body):
