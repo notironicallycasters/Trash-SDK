@@ -17,7 +17,7 @@ func _on_start_body_entered(body):
 
 func _on_end_body_entered(body):
 	if body.name == "Trash":
-		player = get_parent().get_parent().get_node("Player")
+		player = get_parent().get_parent().get_parent().get_node("Player")
 		if finsihable:
 			player.finished = true
 		if player == null:
